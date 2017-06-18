@@ -13,7 +13,7 @@ namespace Emart
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             routes.MapRoute(
-                name: "Default",
+                name: "Shop",
                 url: "shop/{id}",
                 defaults: new { controller = "Shop", action = "Index", id = UrlParameter.Optional }
             );

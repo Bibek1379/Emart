@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Emart.Models;
+using Emart.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,13 +10,24 @@ namespace Emart.Controllers
 {
     public class ShopController : Controller
     {
+        TemplateContext db = new TemplateContext();
         // GET: Shop/{username}
         public ActionResult Index(string id)
         {
             string VendorUsername = id;
+            var VendorData = db.Vendor.SqlQuery("Select * from Vendors where Username = @p0", VendorUsername).SingleOrDefault();
 
+            var TemplateData = db.Template.SqlQuery("Select * from Templates where TemplateId = @p0", VendorData.TemplateId).FirstOrDefault();
 
-            return View();
+            var output = db.Database.SqlQuery<Eshopper>(" Select * from " + TemplateData.TemplateName + " where VendorId = @p0 ", VendorData.VendorId).SingleOrDefault();
+
+            EshopperViewModel mytheme = new EshopperViewModel();
+            mytheme.Output = output;
+            mytheme.Template = TemplateData;
+
+            return View("~/Views/shop/Eshopper/eshopper.cshtml", mytheme);
+
+           
         }
 
        

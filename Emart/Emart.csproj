@@ -145,6 +145,7 @@
     <Compile Include="Models\TemplateContext.cs" />
     <Compile Include="Models\Vendor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\EshopperViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -162,7 +163,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\eshopper\" />
-    <Folder Include="Views\Shop\" />
+    <Folder Include="Views\Shop\Eshopper\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
