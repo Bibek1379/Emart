@@ -10,6 +10,7 @@ namespace Emart.Models
     {
         public int EshopperId { get; set; }
         public string Header { get; set; }
+        public string Title { get; set; }
         public string Footer { get; set; }
         public int VendorId { get; set; }
         
