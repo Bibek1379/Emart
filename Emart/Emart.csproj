@@ -163,7 +163,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\eshopper\" />
-    <Folder Include="Views\Shop\Eshopper\" />
+    <Folder Include="Views\Shop\Eshoppers\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

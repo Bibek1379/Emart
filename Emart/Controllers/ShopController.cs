@@ -2,6 +2,7 @@
 using Emart.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -24,8 +25,10 @@ namespace Emart.Controllers
             EshopperViewModel mytheme = new EshopperViewModel();
             mytheme.Output = output;
             mytheme.Template = TemplateData;
+            var path = Path.Combine(@"~/Views/shop", TemplateData.TemplateName, "index.cshtml");
 
-            return View("~/Views/shop/Eshopper/eshopper.cshtml", mytheme);
+
+            return View(path, mytheme);
 
            
         }
