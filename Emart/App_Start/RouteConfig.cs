@@ -12,6 +12,13 @@ namespace Emart
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+
+            routes.MapRoute(
+               name: "Customize eShopper",
+               url: "shop/customizeeshopper",
+               defaults: new { controller = "Shop", action = "customizeeshopper" }
+           );
+
             routes.MapRoute(
                 name: "Create Shop",
                 url: "shop/create",

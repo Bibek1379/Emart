@@ -88,6 +88,8 @@ namespace Emart.Controllers
             
         }
 
+        
+
         public ActionResult choosetemplate()
         {
             if (Session["Username"] != null)
@@ -125,25 +127,55 @@ namespace Emart.Controllers
 
         }
 
-        public ActionResult Customize(int id)
+        public ActionResult Customize(int Id)
         {
-            var User = db.Vendor.SqlQuery("SELECT * from Vendors where VendorId = @p0", id).SingleOrDefault();
+            var User = db.Vendor.SqlQuery("SELECT * from Vendors where VendorId = @p0", Id).SingleOrDefault();
             var TemplateData = Tname(User);
-            string TemplateName = TemplateData.TemplateName;
+            var TemplateDetail = new object();
+            
+            if (TemplateData.TemplateName == "Eshoppers"){
+                TemplateDetail = db.Database.SqlQuery<Eshopper>("Select * from " + TemplateData.TemplateName + " where VendorId = @p0 ", Id).SingleOrDefault();
+                if (TemplateDetail == null)
+                {
+                    TemplateDetail = db.Database.SqlQuery<Eshopper>("Select * from " + TemplateData.TemplateName + " where Id = 2 ").SingleOrDefault();
+                    //  TemplateDetailBool = true;
 
-
-            if (User.Equals(null))
-            {
+                }
+               
 
             }
 
-            if (User != null)
-            {
 
+            var path = Path.Combine(@"~/Views/shop", TemplateData.TemplateName, "customize.cshtml");
+
+
+            return View(path,TemplateDetail);
+        }
+
+        public ActionResult CustomizeEshopper(Eshopper shop)
+        {
+            int Result;
+            List<object> lst = new List<object>();
+            lst.Add(shop.slider1_Text1);
+            lst.Add(shop.slider1_Text2);
+            lst.Add(shop.slider2_Text1);
+            lst.Add(shop.VendorId);
+            object[] CustomizedShop = lst.ToArray();
+            var NewVendor = db.Eshopper.SqlQuery("SELECT * from Eshoppers where VendorId=@p0",shop.VendorId).SingleOrDefault();
+            if (NewVendor!= null)
+            {
+                 Result = db.Database.ExecuteSqlCommand("UPDATE Eshoppers set Slider1_Text1=@p0,slider1_Text2=@p1,slider2_Text1=@p2 where VendorId=@p3", CustomizedShop);
 
             }
+            else
+            {
+                 Result = db.Database.ExecuteSqlCommand("INSERT into Eshoppers(slider1_Text1,slider1_Text2,slider2_Text1) VALUES (@p0,@p1,@p2) where VendorId=@p3", CustomizedShop);
+            }
+            if (Result > 0) {
+                return RedirectToAction("Customize", new { id = shop.VendorId });
+            }
 
-            return View();
+            return HttpNotFound();
         }
 
 

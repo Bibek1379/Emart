@@ -11,6 +11,13 @@ namespace Emart.Models
     {
         [Key]
         public int Id { get; set; }
+        public string slider1_Text1 { get; set; }
+        public string slider1_Text1_color { get; set; }
+        public string slider1_Text2 { get; set; }
+        public string slider1_Text2_color { get; set; }
+        public string slider1_Text3 { get; set; }
+        public string slider1_Text3_color { get; set; }
+        public string slider2_Text1 { get; set; }
         public int MobileNumber { get; set; }
         public string Email { get; set; }
         public string FacebookLink { get; set; }
